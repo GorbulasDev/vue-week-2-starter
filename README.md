@@ -11,4 +11,4 @@ Mathieu Poirier
 * validation
 * more computed properties
 
-Still more work to be done!
+Still more work to be done!w
