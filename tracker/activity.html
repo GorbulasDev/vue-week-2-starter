@@ -25,9 +25,7 @@
                         <li v-for="error in errors">{{ error }}</li>
                     </ul>
                 </div>
-
-                <!-- TODO (using v-if directive): display different colors based on results...-->
-
+                
                 <div class="form-group">
                     <label class="form-label" for="date">What date did you do this activity?</label>
                     <input id="date" class="form-control" type="date" v-model="dateString">
@@ -56,11 +54,13 @@
                     What media?
                 </div>
 
+                <!-- Traditional option. -->
                 <div class="form-check-inline">
-                    <input id="media1" class="form-check-input" type="radio" value="Traditional" v-model="medium">
+                    <input id="media1" class="form-check-input" type="radio" value="Traditional" v-model="medium" v-bind:style="a">
                     <label class="form-check-label" for="media1">Traditional</label>
                 </div>
 
+                <!-- Digital option. -->
                 <div class="form-check-inline">
                     <input id="media2" class="form-check-input" type="radio" value="Digital" v-model="medium">
                     <label class="form-check-label" for="media2">Digital</label>
@@ -102,7 +102,7 @@
                             <th>Completed?</th>
                             <th>Notes</th>
                         </tr>
-                        <tr v-for="record in activityRecords">
+                        <tr v-for="record in activityRecords" v-bind:class="record.type">
                             <td>{{ formatDate(record.date) }}</td>
                             <td>{{ record.hours }}</td>
                             <td>{{ record.type }}</td>
@@ -118,7 +118,7 @@
         <div class="card">
             <h2 class="card-header">Summary</h2>
             <div class="card-body">
-                <p>You have practiced a total of {{ totalHours }} hours.</p>
+                <p>You have practiced a total of {{ totalHours }}.</p>
             </div>
         </div>
     </div>
@@ -218,11 +218,15 @@
                 },
                 totalHours() {
                     let total = 0
-                    this.activityRecords.forEach( (record) => {
+                    this.activityRecords.forEach((record) => {
                         total = total + record.hours
                     })
                     
-                    return total
+                    if (total === 1) {
+                        return '1 hour'
+                    } else {
+                        return total + '  hours'
+                    }
                 },
             }
         })

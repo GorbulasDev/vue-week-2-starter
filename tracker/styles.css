@@ -3,14 +3,14 @@
     overflow: scroll;
 }
 
-#drawing {
-    background-color: red;
+.Drawing {
+    background-color: crimson;
 }
 
-# {
-    background-color: blue;
+.Painting {
+    background-color: skyblue;
 }
 
-# {
-    background-color: green;
+.Sketching {
+    background-color: limegreen;
 }
